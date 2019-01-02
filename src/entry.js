@@ -10,6 +10,7 @@ import {
   Link,
   withRouter
 } from 'react-router-dom'
+import { Provider as RebassProvider } from 'rebass'
 import minimatch from 'minimatch'
 import sortBy from 'lodash.sortby'
 
@@ -153,6 +154,7 @@ export default class Root extends React.Component {
         basename={basename}
         location={path}>
         <React.Fragment>
+          <RebassProvider>
             <ScopeProvider>
               <Catch>
                 <RouterState
@@ -169,6 +171,7 @@ export default class Root extends React.Component {
                 />
               </Catch>
             </ScopeProvider>
+          </RebassProvider>
           {!disableScroll && <ScrollTop />}
         </React.Fragment>
       </Router>
@@ -190,3 +193,4 @@ if (IS_CLIENT) {
 if (IS_CLIENT && module.hot) {
   module.hot.accept()
 }
+
