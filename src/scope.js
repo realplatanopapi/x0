@@ -60,12 +60,31 @@ export const code = ({
 
 const pre = props => props.children
 
+// Snatched from @rebass/markdown.
+// https://github.com/rebassjs/mdx/blob/342e0cf3db1fb262cc442c06d41b42bb5ad9708b/markdown/index.js#L146
+const createHeading = Component => props => {
+  if (!props.id) return React.createElement(Component, props)
+  return React.createElement(Component, props,
+    React.createElement(link, {
+      href: '#' + props.id
+    },
+      props.children
+    )
+  )
+}
+
 const scope = {
   MDXTag,
   components: {}, // does mdx need this?
   a: link,
   code,
-  pre
+  pre,
+  h1: createHeading('h1'),
+  h2: createHeading('h2'),
+  h3: createHeading('h3'),
+  h4: createHeading('h4'),
+  h5: createHeading('h5'),
+  h6: createHeading('h6')
 }
 
 export default scope
