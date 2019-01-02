@@ -6,6 +6,7 @@ import {
   LiveError
 } from 'react-live'
 import { ScopeConsumer } from 'react-scope-provider'
+import { Box } from 'rebass'
 import { color, borderColor } from 'styled-system'
 import styled from 'styled-components'
 import mdx from '@mdx-js/mdx'
@@ -52,23 +53,25 @@ export default ({
   render,
   mdx
 }) => (
-  <ScopeConsumer defaultScope={scope}>
-    {scope => (
-      <LiveProvider
-        code={code}
-        scope={scope}
-        mountStylesheet={false}
-        transformCode={mdx ? transformMdx : transformCode}>
-        {typeof render === 'function' ? (
-          render({ code, scope })
-        ) : (
-          <React.Fragment>
-            <Preview />
-            <Editor />
-            <Err />
-          </React.Fragment>
-        )}
-      </LiveProvider>
-    )}
-  </ScopeConsumer>
+  <Box mb={4}>
+    <ScopeConsumer defaultScope={scope}>
+      {scope => (
+        <LiveProvider
+          code={code}
+          scope={scope}
+          mountStylesheet={false}
+          transformCode={mdx ? transformMdx : transformCode}>
+          {typeof render === 'function' ? (
+            render({ code, scope })
+          ) : (
+            <React.Fragment>
+              <Preview />
+              <Editor />
+              <Err />
+            </React.Fragment>
+          )}
+        </LiveProvider>
+      )}
+    </ScopeConsumer>
+  </Box>
 )
